@@ -1,0 +1,29 @@
+framework:
+    messenger:
+        # The bus that is going to be injected when injecting MessageBusInterface
+        default_bus: command.bus
+        buses:
+            command.bus:
+                middleware:
+                    - validation
+                    # each time a message is handled, the Doctrine connection
+                    # is "pinged" and reconnected if it's closed. Useful
+                    # if your workers run for a long time and the database
+                    # connection is sometimes lost
+                    - doctrine_ping_connection
+
+                    # After handling, the Doctrine connection is closed,
+                    # which can free up database connections in a worker,
+                    # instead of keeping them open forever
+                    - doctrine_close_connection
+
+                    # wraps all handlers in a single Doctrine transaction
+                    # handlers do not need to call flush() and an error
+                    # in any handler will cause a rollback
+                    - doctrine_transaction
+
+                    # or pass a different entity manager to any
+                    #- doctrine_transaction: ['custom']
+            query.bus:
+                middleware:
+                    - validation
