@@ -59,8 +59,7 @@ final class AddProductHandler implements MessageHandlerInterface
         /** @var Product $product */
         $product = $this->productRepository->find($command->getCartId());
 
-        $cart->addProduct($command->getProductId());
-        $cart->setTotal($cart->getTotal() + $product->getPrice());
+        $cart->addProduct($product);
 
         $this->cartRepository->update($cart);
     }

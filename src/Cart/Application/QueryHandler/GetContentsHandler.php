@@ -68,6 +68,6 @@ final class GetContentsHandler implements MessageHandlerInterface
             ];
         }
 
-        return new CartView($cart->getId(), $cart->getTotal(), $products);
+        return new CartView($cart->getId(), $cart->getTotal(), $cart->getProducts());
     }
 }

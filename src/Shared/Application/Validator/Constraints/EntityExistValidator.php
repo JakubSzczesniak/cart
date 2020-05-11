@@ -18,7 +18,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 /**
  * Class EntityExistValidator
  */
-class EntityExistValidator extends ConstraintValidator
+final class EntityExistValidator extends ConstraintValidator
 {
     /**
      * Full entity className

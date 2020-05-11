@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Symfony 4 CQRS Cart Project.
  *
@@ -20,7 +22,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * Class ProductRepository
  */
-class ProductRepository extends ServiceEntityRepository implements ProductRepositoryInterface
+final class ProductRepository extends ServiceEntityRepository implements ProductRepositoryInterface
 {
     /**
      * @var EntityManagerInterface
@@ -52,10 +54,5 @@ class ProductRepository extends ServiceEntityRepository implements ProductReposi
     public function remove(Product $product): void
     {
         $this->entityManager->remove($product);
-    }
-
-    public function update(Product $product): void
-    {
-        $this->entityManager->persist($product);
     }
 }

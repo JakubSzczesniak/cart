@@ -52,6 +52,6 @@ final class UpdateProductHandler implements MessageHandlerInterface
             $product->setName($command->getName());
         }
 
-        $this->productRepository->update($product);
+        $this->productRepository->add($product);
     }
 }

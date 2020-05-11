@@ -35,9 +35,4 @@ interface CartRepositoryInterface extends ObjectRepository
      * @param Cart $cart
      */
     public function remove(Cart $cart): void;
-
-    /**
-     * @param Cart $cart
-     */
-    public function update(Cart $cart): void;
 }

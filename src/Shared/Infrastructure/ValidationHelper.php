@@ -19,7 +19,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 /**
  * Class ValidationHelper
  */
-class ValidationHelper
+final class ValidationHelper
 {
     /**
      * @var ConstraintViolationListInterface

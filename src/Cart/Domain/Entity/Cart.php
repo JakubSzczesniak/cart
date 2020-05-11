@@ -12,6 +12,7 @@
 namespace App\Cart\Domain\Entity;
 
 use App\Cart\Domain\Event\ProductAddedEvent;
+use App\Product\Domain\Entity\Product;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,8 +41,6 @@ final class Cart
      */
     private $total;
 
-    private $events = [];
-
     /**
      * Cart constructor.
      */
@@ -59,13 +58,12 @@ final class Cart
     }
 
     /**
-     * @param int $productId
+     * @param Product $product
      */
-    public function addProduct(int $productId): void
+    public function addProduct(Product $product): void
     {
-        $this->products[] = $productId;
-
-        $this->events[] = new ProductAddedEvent($this->getId(), $productId);
+        $this->products[] = $product->getId();
+        $this->total += $product->getPrice();
     }
 
     /**
@@ -77,12 +75,22 @@ final class Cart
     }
 
     /**
-     * @param int $productId
+     * @param Product $product
+     *
+     * @return bool
      */
-    public function removeProduct(int $productId): void
+    public function hasProduct(Product $product): bool
     {
-        if (($key = array_search($productId, $this->products)) !== false) {
-            unset($this->products[$key]);
+        return in_array($product->getId(), $this->getProducts());
+    }
+
+    /**
+     * @param Product $product
+     */
+    public function removeProduct(Product $product): void
+    {
+        if ($this->hasProduct($product)) {
+            unset($this->products[$product->getId()]);
         }
     }
 
@@ -92,13 +100,5 @@ final class Cart
     public function getTotal(): int
     {
         return $this->total;
-    }
-
-    /**
-     * @param int $total
-     */
-    public function setTotal(int $total): void
-    {
-        $this->total = $total;
     }
 }

@@ -35,9 +35,4 @@ interface ProductRepositoryInterface extends ObjectRepository
      * @param Product $product
      */
     public function remove(Product $product): void;
-
-    /**
-     * @param Product $product
-     */
-    public function update(Product $product): void;
 }

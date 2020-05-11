@@ -14,7 +14,7 @@ namespace App\Shared\Domain;
 /**
  * Class Paginator
  */
-class Paginator
+final class Paginator
 {
     public const PAGE_SIZE = 3;
 

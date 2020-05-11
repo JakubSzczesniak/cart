@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class EntityExist extends Constraint
+final class EntityExist extends Constraint
 {
     public $message = 'The entity "{{ string }}" does not exist.';
 
